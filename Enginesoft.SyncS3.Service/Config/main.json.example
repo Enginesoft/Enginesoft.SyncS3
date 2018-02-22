@@ -1,0 +1,21 @@
+﻿{
+  "awsConfigurations": [
+    {
+      "name": "awsConfig1",
+      "awsCredential": {
+        "acesssKey": "ASASASASASSASASSSA",
+        "secretKey": "sjsjsjsjsjsjsj+ksksksksksk",
+        "region": "us-west-2"
+      }
+    }
+  ],
+  "syncConfigurations": [
+    {
+      "name": "sync1",
+      "awsConfigurationName": "awsConfig1",
+      "localPath": "C:\\Temp\\SyncS3",
+      "serverPath": "s3test",
+      "fileFilter": "*.*"
+    }
+  ]
+}
