@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Text.Json;
 
 namespace Enginesoft.SyncS3.Service
 {
@@ -75,8 +71,7 @@ namespace Enginesoft.SyncS3.Service
             try
             {
                 var json = GetConfigurationJson(path);
-                var jsonSeriallizerSettings = GetJsonSeriallizerSettings();
-                configuration = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Configuration>(json, jsonSeriallizerSettings);
+                configuration = JsonSerializer.Deserialize<Models.Configuration>(json);
             }
             catch (System.Exception ex)
             {
@@ -208,13 +203,6 @@ namespace Enginesoft.SyncS3.Service
             StartSync();
         }
         
-        private Newtonsoft.Json.JsonSerializerSettings GetJsonSeriallizerSettings()
-        {
-            var jsonSeriallizerSettings = new Newtonsoft.Json.JsonSerializerSettings();
-            jsonSeriallizerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
-            return jsonSeriallizerSettings;
-        }
-
         private string GetConfigurationJson(string path)
         {
             string json;
